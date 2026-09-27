@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disponibles</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <h1>Disponibles</h1>
+    <span class="total" id="total">cargando…</span>
+  </div>
+
+  <div class="search">
+    <input id="q" type="search" autocomplete="off" autocapitalize="off" spellcheck="false"
+           placeholder="buscar nick" aria-label="Buscar nick">
+    <button type="button" id="clear" class="clear" title="Borrar" hidden>&times;</button>
+  </div>
+
+  <p class="hint">
+    Si quieres buscar un nombre terminado en &laquo;ab&raquo; escribe &laquo;..ab&raquo;:
+    cada punto significa un caracter al azar que puede tener.
+  </p>
+</header>
+
+<main>
+  <section id="indexView">
+    <table class="letters" id="letters"><tbody></tbody></table>
+  </section>
+
+  <section id="gridView" hidden>
+    <div class="bar">
+      <button type="button" id="back" class="back">&lsaquo; &Iacute;ndice</button>
+      <h2 id="gridTitle"></h2>
+      <span class="count" id="gridCount"></span>
+      <span class="status" id="gridStatus"></span>
+    </div>
+    <div class="viewport" id="viewport">
+      <div class="canvas" id="canvas">
+        <div class="rows" id="rows"></div>
+      </div>
+    </div>
+    <p class="empty" id="empty" hidden></p>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
