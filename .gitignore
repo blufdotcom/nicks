@@ -1,2 +1,3 @@
 disponibles.txt
 *.log
+__pycache__/
