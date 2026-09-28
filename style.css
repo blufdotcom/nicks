@@ -42,6 +42,7 @@ h1 {
 }
 
 .total, .count, .status { color: var(--muted); font-size: .85rem; }
+.stamp { color: var(--muted); font-size: .7rem; opacity: .6; }
 .count { font-variant-numeric: tabular-nums; }
 .status { margin-left: auto; font-style: italic; }
 

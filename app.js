@@ -7,7 +7,7 @@ const DEBOUNCE = 120;
 
 const $ = (id) => document.getElementById(id);
 const ui = {
-  total: $('total'), q: $('q'), clear: $('clear'),
+  total: $('total'), stamp: $('stamp'), q: $('q'), clear: $('clear'),
   indexView: $('indexView'), letters: $('letters').tBodies[0],
   gridView: $('gridView'), back: $('back'), title: $('gridTitle'),
   count: $('gridCount'), status: $('gridStatus'), empty: $('empty'),
@@ -19,6 +19,7 @@ const escRe = /[.*+?^${}()|[\]\\]/g;
 
 let idx = null;
 const cache = new Map();
+let stamp = '';
 let items = null;
 let run = 0;
 let timer = 0;
@@ -26,7 +27,7 @@ let timer = 0;
 function loadSource(file) {
   let p = cache.get(file);
   if (!p) {
-    p = fetch(DATA + file)
+    p = fetch(DATA + file + stamp)
       .then((r) => {
         if (!r.ok) throw new Error(file + ' -> HTTP ' + r.status);
         return r.json();
@@ -294,13 +295,18 @@ function buildIndex() {
   ui.letters.replaceChildren(frag);
 }
 
-fetch(DATA + 'index.json')
+fetch(DATA + 'index.json', { cache: 'no-cache' })
   .then((r) => {
     if (!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   })
   .then((data) => {
     idx = data;
+    stamp = data.built ? '?v=' + data.built : '';
+    const when = data.built
+      ? new Date(data.built * 1000).toLocaleString('es-AR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
+      : '';
+    if (when) ui.stamp.textContent = 'datos del ' + when;
     ui.total.textContent = countLabel(data.total) + ' de ' + data.length + ' caracteres';
     buildIndex();
     ui.q.focus();

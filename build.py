@@ -4,6 +4,7 @@ inicial y all.json con todo, con las palabras pegadas de a 4 caracteres."""
 
 import json
 import os
+import time
 
 SRC = "disponibles.txt"
 OUT = "data"
@@ -55,6 +56,7 @@ def main():
         "total": len(ordered),
         "alphabet": ALPHABET,
         "length": LEN,
+        "built": int(time.time()),
         "letters": letters,
     }
     with open(os.path.join(OUT, "index.json"), "w", encoding="utf-8") as fh:
